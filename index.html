@@ -18,41 +18,18 @@
       --blue: #2563eb;
       --sky: #38bdf8;
       --violet: #8b5cf6;
-      --text: #1f2937;
-      --muted: rgba(31, 41, 55, 0.68);
+      --text: #172033;
+      --muted: rgba(23, 32, 51, 0.68);
       --soft: rgba(255, 255, 255, 0.72);
-      --line: rgba(37, 99, 235, 0.18);
+      --border: rgba(37, 99, 235, 0.14);
     }
 
     body {
       margin: 0;
-      font-family: "Pretendard", sans-serif;
-      background: #0f172a;
+      font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: #eef5ff;
       color: var(--text);
       overflow: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.28), transparent 28%),
-        radial-gradient(circle at 86% 12%, rgba(139, 92, 246, 0.22), transparent 26%),
-        radial-gradient(circle at 78% 82%, rgba(37, 99, 235, 0.18), transparent 30%);
-      z-index: -3;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
-      background-size: 42px 42px;
-      opacity: 0.18;
-      z-index: -2;
     }
 
     .slide {
@@ -61,97 +38,183 @@
       width: 100vw;
       height: 100vh;
       padding: 72px 92px;
-      background: linear-gradient(135deg, rgba(248, 250, 252, 0.96), rgba(239, 246, 255, 0.94));
       overflow: hidden;
-    }
-
-    .slide::before {
-      content: "";
-      position: absolute;
-      width: 360px;
-      height: 360px;
-      right: -120px;
-      top: -120px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(37,99,235,0.18), rgba(139,92,246,0.12));
-      filter: blur(2px);
-    }
-
-    .slide::after {
-      content: "";
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      left: 58px;
-      bottom: 64px;
-      border-radius: 28px;
-      border: 1px solid rgba(37, 99, 235, 0.16);
-      transform: rotate(18deg);
-      opacity: 0.55;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(56, 189, 248, 0.16), transparent 28%),
+        radial-gradient(circle at 82% 78%, rgba(139, 92, 246, 0.10), transparent 30%),
+        linear-gradient(135deg, #f8fbff 0%, #edf5ff 100%);
     }
 
     .slide.active {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      animation: slideIn 0.55s ease both;
     }
 
-    @keyframes slideIn {
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(37, 99, 235, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.055) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.55), transparent 78%);
+      z-index: 0;
+    }
+
+    .shape {
+      position: absolute;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .orb {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(37,99,235,0.14), rgba(139,92,246,0.14));
+      filter: blur(1px);
+      animation: floatSlow 7s ease-in-out infinite;
+    }
+
+    .orb.small {
+      width: 120px;
+      height: 120px;
+      opacity: 0.65;
+      animation-duration: 5.5s;
+    }
+
+    .ring {
+      width: 160px;
+      height: 160px;
+      border: 2px solid rgba(37, 99, 235, 0.13);
+      border-radius: 34px;
+      transform: rotate(14deg);
+      animation: rotateSoft 12s linear infinite;
+    }
+
+    .line {
+      width: 220px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.32), transparent);
+      animation: slideLine 5s ease-in-out infinite;
+    }
+
+    .mini-dots {
+      width: 120px;
+      height: 86px;
+      background-image: radial-gradient(rgba(37, 99, 235, 0.24) 3px, transparent 4px);
+      background-size: 22px 22px;
+      opacity: 0.85;
+      animation: floatSlow 6s ease-in-out infinite;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-14px);
+      }
+    }
+
+    @keyframes rotateSoft {
       from {
-        opacity: 0;
-        transform: translateY(18px) scale(0.985);
+        transform: rotate(14deg);
       }
       to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: rotate(374deg);
+      }
+    }
+
+    @keyframes slideLine {
+      0%, 100% {
+        transform: translateX(0);
+        opacity: 0.25;
+      }
+      50% {
+        transform: translateX(28px);
+        opacity: 0.65;
       }
     }
 
     h1, h2, p, li, table, .tag, .card, .box {
       position: relative;
       z-index: 1;
+      word-break: keep-all;
+      overflow-wrap: normal;
     }
 
     h1 {
       margin: 0 0 24px;
-      font-size: 64px;
-      line-height: 1.12;
+      font-size: 58px;
+      line-height: 1.16;
       font-weight: 850;
-      letter-spacing: -3.2px;
-      color: #0f172a;
-      animation: fadeUp 0.7s ease both;
+      letter-spacing: -1.4px;
+      color: #101828;
+    }
+
+    .hero-title {
+      font-size: 60px;
+      letter-spacing: -1.2px;
+      white-space: nowrap;
     }
 
     h2 {
       margin: 0 0 30px;
-      font-size: 43px;
-      line-height: 1.18;
+      font-size: 42px;
+      line-height: 1.2;
       font-weight: 820;
-      letter-spacing: -2.1px;
-      color: #111827;
-      animation: fadeUp 0.65s ease both;
+      letter-spacing: -0.8px;
+      color: #101828;
     }
 
     h2::before {
       content: "";
       display: inline-block;
-      width: 9px;
-      height: 34px;
-      margin-right: 16px;
+      width: 8px;
+      height: 32px;
+      margin-right: 15px;
       border-radius: 999px;
       background: linear-gradient(180deg, var(--blue), var(--sky));
       vertical-align: -5px;
     }
 
     p {
-      margin: 12px 0;
-      font-size: 25px;
-      line-height: 1.62;
+      margin: 10px 0;
+      font-size: 23px;
+      line-height: 1.48;
       font-weight: 500;
-      letter-spacing: -0.55px;
-      color: rgba(31, 41, 55, 0.88);
-      animation: fadeUp 0.75s ease both;
+      letter-spacing: -0.25px;
+      color: rgba(23, 32, 51, 0.82);
+    }
+
+    .lead {
+      max-width: 980px;
+      font-size: 25px;
+      line-height: 1.5;
+      letter-spacing: -0.2px;
+    }
+
+    .subtitle {
+      font-size: 28px;
+      line-height: 1.35;
+      font-weight: 560;
+      letter-spacing: -0.35px;
+      color: rgba(71, 85, 105, 0.72);
+      margin-bottom: 22px;
+    }
+
+    .small {
+      font-size: 19px;
+      color: rgba(71, 85, 105, 0.58);
+      letter-spacing: -0.1px;
+    }
+
+    .source {
+      margin-top: 22px;
+      font-size: 17px;
+      color: rgba(71, 85, 105, 0.54);
     }
 
     ul {
@@ -160,41 +223,30 @@
       list-style: none;
       position: relative;
       z-index: 1;
+      max-width: 1080px;
     }
 
     li {
       margin-bottom: 13px;
-      padding-left: 30px;
-      font-size: 23.5px;
-      line-height: 1.52;
-      font-weight: 500;
-      letter-spacing: -0.45px;
-      color: rgba(31, 41, 55, 0.86);
+      padding-left: 29px;
+      font-size: 22px;
+      line-height: 1.42;
+      font-weight: 520;
+      letter-spacing: -0.18px;
+      color: rgba(23, 32, 51, 0.80);
       position: relative;
-      animation: fadeUp 0.75s ease both;
     }
 
     li::before {
       content: "";
       position: absolute;
-      left: 0;
-      top: 13px;
-      width: 9px;
-      height: 9px;
+      left: 1px;
+      top: 12px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--blue), var(--sky));
-      box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.1);
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.08);
     }
 
     .tag {
@@ -205,14 +257,13 @@
       padding: 10px 18px;
       margin-bottom: 24px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.74);
       border: 1px solid rgba(37, 99, 235, 0.15);
-      color: rgba(37, 99, 235, 0.9);
+      color: rgba(37, 99, 235, 0.92);
       font-size: 18px;
-      font-weight: 750;
-      letter-spacing: -0.25px;
+      font-weight: 760;
+      letter-spacing: -0.1px;
       backdrop-filter: blur(10px);
-      animation: fadeUp 0.55s ease both;
     }
 
     .tag::before {
@@ -221,42 +272,24 @@
       height: 9px;
       border-radius: 50%;
       background: var(--blue);
-      box-shadow: 0 0 16px rgba(37, 99, 235, 0.55);
-    }
-
-    .subtitle {
-      font-size: 29px;
-      font-weight: 560;
-      letter-spacing: -0.9px;
-      color: rgba(71, 85, 105, 0.76);
-      margin-bottom: 36px;
-    }
-
-    .small {
-      font-size: 20px;
-      color: rgba(71, 85, 105, 0.62);
-      letter-spacing: -0.25px;
-    }
-
-    .source {
-      margin-top: 22px;
-      font-size: 18px;
-      color: rgba(71, 85, 105, 0.56);
+      box-shadow: 0 0 16px rgba(37, 99, 235, 0.45);
     }
 
     .box {
+      max-width: 1000px;
       margin-top: 24px;
-      padding: 24px 28px;
+      padding: 22px 26px;
       border-radius: 22px;
       background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(37, 99, 235, 0.13);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.07);
       backdrop-filter: blur(14px);
-      animation: cardIn 0.8s ease both;
     }
 
     .box p {
       margin: 0;
+      font-size: 22px;
+      line-height: 1.45;
     }
 
     .cards {
@@ -265,118 +298,71 @@
       gap: 18px;
       position: relative;
       z-index: 1;
-    }
-
-    .cards.two {
-      grid-template-columns: repeat(2, 1fr);
+      max-width: 1120px;
     }
 
     .card {
-      min-height: 150px;
-      padding: 24px 24px;
+      min-height: 148px;
+      padding: 23px 23px;
       border-radius: 24px;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(37, 99, 235, 0.13);
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.07);
       backdrop-filter: blur(14px);
-      animation: cardIn 0.8s ease both;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 26px 54px rgba(15, 23, 42, 0.12);
-    }
-
-    .card:nth-child(2) {
-      animation-delay: 0.08s;
-    }
-
-    .card:nth-child(3) {
-      animation-delay: 0.16s;
-    }
-
-    .card:nth-child(4) {
-      animation-delay: 0.24s;
-    }
-
-    @keyframes cardIn {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      box-shadow: 0 26px 52px rgba(15, 23, 42, 0.11);
     }
 
     .icon {
       width: 42px;
       height: 42px;
-      margin-bottom: 16px;
+      margin-bottom: 15px;
       display: grid;
       place-items: center;
       border-radius: 14px;
-      background: linear-gradient(135deg, rgba(37,99,235,0.14), rgba(56,189,248,0.16));
+      background: linear-gradient(135deg, rgba(37,99,235,0.13), rgba(56,189,248,0.15));
       font-size: 22px;
     }
 
     .card-title {
       margin: 0 0 8px;
       font-size: 22px;
+      line-height: 1.25;
       font-weight: 800;
-      letter-spacing: -0.7px;
-      color: #111827;
+      letter-spacing: -0.35px;
+      color: #101828;
     }
 
     .card-desc {
       margin: 0;
-      font-size: 19px;
-      line-height: 1.48;
-      color: rgba(31, 41, 55, 0.66);
-      letter-spacing: -0.35px;
-    }
-
-    .hero-meta {
-      display: flex;
-      gap: 12px;
-      margin-top: 26px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .pill {
-      padding: 10px 15px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.62);
-      border: 1px solid rgba(37, 99, 235, 0.12);
-      font-size: 18px;
-      font-weight: 650;
-      color: rgba(31, 41, 55, 0.62);
-      letter-spacing: -0.25px;
-      backdrop-filter: blur(10px);
-      animation: fadeUp 0.8s ease both;
+      font-size: 18.5px;
+      line-height: 1.38;
+      color: rgba(23, 32, 51, 0.64);
+      letter-spacing: -0.1px;
     }
 
     table {
       width: 100%;
+      max-width: 1080px;
       border-collapse: separate;
       border-spacing: 0;
       overflow: hidden;
       border-radius: 24px;
-      font-size: 21px;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(37, 99, 235, 0.14);
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+      font-size: 20.5px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.07);
       backdrop-filter: blur(14px);
-      animation: cardIn 0.8s ease both;
     }
 
     th, td {
-      padding: 18px 16px;
+      padding: 17px 16px;
       text-align: center;
-      line-height: 1.42;
+      line-height: 1.35;
       border-bottom: 1px solid rgba(37, 99, 235, 0.11);
       border-right: 1px solid rgba(37, 99, 235, 0.1);
     }
@@ -394,13 +380,27 @@
       background: rgba(37, 99, 235, 0.08);
       color: rgba(17, 24, 39, 0.86);
       font-weight: 820;
-      letter-spacing: -0.4px;
     }
 
     td {
-      color: rgba(31, 41, 55, 0.78);
+      color: rgba(23, 32, 51, 0.78);
       font-weight: 560;
-      letter-spacing: -0.35px;
+    }
+
+    .center {
+      align-items: center;
+      text-align: center;
+    }
+
+    .center h2::before {
+      display: none;
+    }
+
+    .team-line {
+      margin-top: 10px;
+      font-size: 22px;
+      color: rgba(71, 85, 105, 0.66);
+      font-weight: 650;
     }
 
     .controls {
@@ -413,10 +413,10 @@
     }
 
     button {
-      border: 1px solid rgba(255,255,255,0.34);
+      border: 1px solid rgba(15, 23, 42, 0.08);
       padding: 10px 15px;
       border-radius: 999px;
-      background: rgba(15, 23, 42, 0.38);
+      background: rgba(15, 23, 42, 0.34);
       color: white;
       font-size: 14px;
       font-family: "Pretendard", sans-serif;
@@ -426,7 +426,7 @@
     }
 
     button:hover {
-      background: rgba(37, 99, 235, 0.75);
+      background: rgba(37, 99, 235, 0.72);
       transform: translateY(-2px);
     }
 
@@ -438,7 +438,6 @@
       font-size: 16px;
       font-weight: 650;
       color: rgba(15, 23, 42, 0.52);
-      letter-spacing: -0.2px;
     }
 
     .progress-wrap {
@@ -455,38 +454,7 @@
       height: 100%;
       width: 6.66%;
       background: linear-gradient(90deg, var(--blue), var(--sky), var(--violet));
-      transition: width 0.35s ease;
-    }
-
-    .dots {
-      position: absolute;
-      right: 92px;
-      bottom: 92px;
-      display: grid;
-      grid-template-columns: repeat(4, 10px);
-      gap: 12px;
-      opacity: 0.45;
-      z-index: 0;
-    }
-
-    .dots span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(37, 99, 235, 0.5);
-    }
-
-    .center {
-      text-align: center;
-      align-items: center;
-    }
-
-    .center h1 {
-      font-size: 76px;
-    }
-
-    .center h2::before {
-      display: none;
+      transition: width 0.25s ease;
     }
   </style>
 </head>
@@ -495,33 +463,33 @@
 
   <!-- 1장 -->
   <section class="slide active center">
-    <span class="tag">AI와 비즈니스 애플리케이션</span>
-    <h1>깃허브 활용 가이드<br>2026(7팀)</h1>
+    <div class="bg-grid"></div>
+    <div class="shape orb" style="right: -90px; top: -90px;"></div>
+    <div class="shape ring" style="left: 70px; bottom: 86px;"></div>
+    <div class="shape line" style="right: 210px; bottom: 130px;"></div>
+
+    <span class="tag">AI와비즈니스애플리케이션</span>
+    <h1 class="hero-title">깃허브 활용 가이드 2026(7팀)</h1>
     <p class="subtitle">바이브 코딩 HTML 발표자료 및 GitHub Pages 실습</p>
-    <div class="hero-meta">
-      <span class="pill">7팀</span>
-      <span class="pill">Repository: vibe-coding</span>
-      <span class="pill">HTML Presentation</span>
-    </div>
-    <div class="dots">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-    </div>
+    <p class="team-line">7팀 · Repository: vibe-coding</p>
   </section>
 
   <!-- 2장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape orb small" style="right: 120px; top: 96px;"></div>
+    <div class="shape ring" style="right: 120px; bottom: 88px;"></div>
+
     <span class="tag">Vibe Coding</span>
     <h2>1. 바이브 코딩이란?</h2>
-    <p>
-      바이브 코딩은 사람이 직접 모든 코드를 작성하기보다,
-      생성형 인공지능에게 원하는 기능과 목적을 자연어로 설명하고
-      AI가 만들어 준 코드를 활용하여 프로그램을 완성하는 방식이다.
+    <p class="lead">
+      바이브 코딩은 사람이 모든 코드를 직접 작성하기보다,<br>
+      생성형 인공지능에게 원하는 기능과 목적을 설명한 뒤<br>
+      AI가 만든 코드를 활용해 프로그램을 완성하는 방식이다.
     </p>
     <div class="box">
       <p>
-        핵심은 코드를 모두 외우는 것이 아니라,
+        핵심은 코드를 모두 외우는 것이 아니라,<br>
         원하는 결과를 명확히 설명하고 AI의 결과물을 검토하며 개선하는 것이다.
       </p>
     </div>
@@ -530,18 +498,22 @@
 
   <!-- 3장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape line" style="left: 84px; top: 128px;"></div>
+    <div class="shape mini-dots" style="right: 120px; bottom: 110px;"></div>
+
     <span class="tag">Background</span>
     <h2>2. 등장 배경</h2>
     <div class="cards">
       <div class="card">
         <div class="icon">🤖</div>
         <p class="card-title">생성형 AI 발전</p>
-        <p class="card-desc">ChatGPT, GitHub Copilot 같은 AI 도구가 코드 작성 과정을 도와준다.</p>
+        <p class="card-desc">ChatGPT, GitHub Copilot 같은 AI 도구가 코드 작성 과정을 돕는다.</p>
       </div>
       <div class="card">
         <div class="icon">💬</div>
         <p class="card-title">자연어 기반 요청</p>
-        <p class="card-desc">전문 문법을 모두 알지 않아도 말로 원하는 기능을 설명할 수 있다.</p>
+        <p class="card-desc">전문 문법을 모두 알지 않아도 원하는 기능을 말로 설명할 수 있다.</p>
       </div>
       <div class="card">
         <div class="icon">🚀</div>
@@ -553,6 +525,10 @@
 
   <!-- 4장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape orb small" style="left: 92px; bottom: 92px;"></div>
+    <div class="shape line" style="right: 150px; top: 130px;"></div>
+
     <span class="tag">Comparison</span>
     <h2>3. 기존 코딩 방식과의 차이</h2>
     <table>
@@ -581,6 +557,9 @@
 
   <!-- 5장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape ring" style="right: 80px; top: 84px;"></div>
+
     <span class="tag">Process</span>
     <h2>4. 바이브 코딩의 핵심 과정</h2>
     <div class="cards">
@@ -604,11 +583,15 @@
 
   <!-- 6장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape mini-dots" style="left: 84px; bottom: 98px;"></div>
+    <div class="shape orb small" style="right: 110px; top: 96px;"></div>
+
     <span class="tag">Role of AI</span>
     <h2>5. 생성형 AI의 역할</h2>
-    <p>
-      생성형 AI는 사용자의 요구사항을 해석하고, 그에 맞는 코드 초안을 빠르게 작성한다.
-      또한 코드 설명, 오류 수정, 디자인 개선, 기능 추가 등 다양한 작업을 도와준다.
+    <p class="lead">
+      생성형 AI는 사용자의 요구사항을 해석하고,<br>
+      그에 맞는 코드 초안을 빠르게 작성한다.
     </p>
     <div class="cards">
       <div class="card">
@@ -631,18 +614,25 @@
 
   <!-- 7장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape line" style="left: 80px; bottom: 120px;"></div>
+    <div class="shape ring" style="right: 100px; bottom: 92px;"></div>
+
     <span class="tag">Human Role</span>
     <h2>6. 개발자의 역할 변화</h2>
     <ul>
-      <li>단순히 코드를 입력하는 사람에서, AI 결과물을 판단하는 검토자로 역할이 확장된다.</li>
+      <li>단순히 코드를 입력하는 사람에서 AI 결과물을 판단하는 검토자로 역할이 확장된다.</li>
       <li>AI에게 명확하고 구체적인 요청을 전달하는 프롬프트 작성 능력이 중요해진다.</li>
-      <li>생성된 코드가 실제로 작동하는지 확인하고, 목적에 맞게 수정해야 한다.</li>
+      <li>생성된 코드가 실제로 작동하는지 확인하고 목적에 맞게 수정해야 한다.</li>
       <li>오류, 보안 문제, 저작권 문제를 최종적으로 검토하는 책임은 사용자에게 있다.</li>
     </ul>
   </section>
 
   <!-- 8장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape orb small" style="right: 110px; bottom: 110px;"></div>
+
     <span class="tag">Strength</span>
     <h2>7. 바이브 코딩의 장점</h2>
     <div class="cards">
@@ -666,6 +656,10 @@
 
   <!-- 9장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape mini-dots" style="right: 115px; top: 120px;"></div>
+    <div class="shape line" style="left: 90px; bottom: 110px;"></div>
+
     <span class="tag">Limitations</span>
     <h2>8. 바이브 코딩의 한계</h2>
     <ul>
@@ -679,6 +673,9 @@
 
   <!-- 10장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape ring" style="left: 82px; bottom: 88px;"></div>
+
     <span class="tag">Use Cases</span>
     <h2>9. 실제 활용 예시</h2>
     <div class="cards">
@@ -702,29 +699,34 @@
 
   <!-- 11장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape orb small" style="right: 95px; top: 90px;"></div>
+    <div class="shape line" style="right: 170px; bottom: 122px;"></div>
+
     <span class="tag">Business</span>
     <h2>10. 비즈니스에서의 활용</h2>
-    <p>
-      기업에서는 새로운 서비스를 개발하기 전에 간단한 시제품을 빠르게 만들어
-      아이디어를 검증할 수 있다. 또한 업무 자동화, 데이터 분석, 고객 응대 시스템 등
-      다양한 비즈니스 애플리케이션 제작에 활용할 수 있다.
+    <p class="lead">
+      기업에서는 새로운 서비스를 개발하기 전에<br>
+      간단한 시제품을 빠르게 만들어 아이디어를 검증할 수 있다.
     </p>
     <div class="box">
       <p>
-        예를 들어, 작은 회사도 예약 관리 페이지, 문의 응답 시스템,
-        내부 보고서 자동화 도구를 빠르게 제작할 수 있다.
+        예를 들어 예약 관리 페이지, 문의 응답 시스템,<br>
+        내부 보고서 자동화 도구 등을 빠르게 제작할 수 있다.
       </p>
     </div>
   </section>
 
   <!-- 12장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape mini-dots" style="left: 84px; bottom: 100px;"></div>
+
     <span class="tag">GitHub</span>
     <h2>11. GitHub란?</h2>
-    <p>
-      GitHub는 소스 코드와 파일을 저장하고 관리할 수 있는 온라인 플랫폼이다.
-      개발자는 GitHub를 활용해 파일 변경 기록을 남기고, 다른 사람과 협업하며,
-      프로젝트 결과물을 체계적으로 관리할 수 있다.
+    <p class="lead">
+      GitHub는 소스 코드와 파일을 저장하고 관리할 수 있는 온라인 플랫폼이다.<br>
+      파일 변경 기록을 남기고, 협업하며, 프로젝트 결과물을 체계적으로 관리할 수 있다.
     </p>
     <div class="cards">
       <div class="card">
@@ -747,11 +749,15 @@
 
   <!-- 13장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape ring" style="right: 86px; top: 92px;"></div>
+    <div class="shape line" style="left: 90px; bottom: 120px;"></div>
+
     <span class="tag">GitHub Pages</span>
     <h2>12. GitHub Pages 게시</h2>
-    <p>
-      GitHub Pages는 GitHub 리포지터리에 올린 HTML 파일을 웹사이트처럼
-      공개할 수 있게 해주는 기능이다.
+    <p class="lead">
+      GitHub Pages는 GitHub 리포지터리에 올린 HTML 파일을<br>
+      웹사이트처럼 공개할 수 있게 해주는 기능이다.
     </p>
     <ul>
       <li>개인 리포지터리 이름: vibe-coding</li>
@@ -763,6 +769,9 @@
 
   <!-- 14장 -->
   <section class="slide">
+    <div class="bg-grid"></div>
+    <div class="shape orb small" style="left: 92px; bottom: 96px;"></div>
+
     <span class="tag">Summary</span>
     <h2>13. 정리 및 주의할 점</h2>
     <div class="cards">
@@ -786,19 +795,15 @@
 
   <!-- 15장 -->
   <section class="slide center">
-    <span class="tag">End</span>
-    <h1>감사합니다</h1>
-    <p class="subtitle">깃허브 활용 가이드 2026(7팀)</p>
-    <div class="hero-meta">
-      <span class="pill">7팀</span>
-      <span class="pill">vibe-coding</span>
-      <span class="pill">Q & A</span>
-    </div>
-    <div class="dots">
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span>
-    </div>
+    <div class="bg-grid"></div>
+    <div class="shape orb" style="left: -90px; bottom: -90px;"></div>
+    <div class="shape ring" style="right: 92px; top: 88px;"></div>
+    <div class="shape line" style="right: 210px; bottom: 130px;"></div>
+
+    <span class="tag">AI와비즈니스애플리케이션</span>
+    <h1 class="hero-title">깃허브 활용 가이드 2026(7팀)</h1>
+    <p class="subtitle">감사합니다</p>
+    <p class="team-line">7팀 · Q & A</p>
   </section>
 
   <div class="controls">
