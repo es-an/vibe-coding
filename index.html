@@ -1,0 +1,851 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>깃허브 활용 가이드 2026(7팀)</title>
+
+  <style>
+    @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --navy: #111827;
+      --blue: #2563eb;
+      --sky: #38bdf8;
+      --violet: #8b5cf6;
+      --text: #1f2937;
+      --muted: rgba(31, 41, 55, 0.68);
+      --soft: rgba(255, 255, 255, 0.72);
+      --line: rgba(37, 99, 235, 0.18);
+    }
+
+    body {
+      margin: 0;
+      font-family: "Pretendard", sans-serif;
+      background: #0f172a;
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.28), transparent 28%),
+        radial-gradient(circle at 86% 12%, rgba(139, 92, 246, 0.22), transparent 26%),
+        radial-gradient(circle at 78% 82%, rgba(37, 99, 235, 0.18), transparent 30%);
+      z-index: -3;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: 0.18;
+      z-index: -2;
+    }
+
+    .slide {
+      display: none;
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      padding: 72px 92px;
+      background: linear-gradient(135deg, rgba(248, 250, 252, 0.96), rgba(239, 246, 255, 0.94));
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      right: -120px;
+      top: -120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(37,99,235,0.18), rgba(139,92,246,0.12));
+      filter: blur(2px);
+    }
+
+    .slide::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      left: 58px;
+      bottom: 64px;
+      border-radius: 28px;
+      border: 1px solid rgba(37, 99, 235, 0.16);
+      transform: rotate(18deg);
+      opacity: 0.55;
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: slideIn 0.55s ease both;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    h1, h2, p, li, table, .tag, .card, .box {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      font-size: 64px;
+      line-height: 1.12;
+      font-weight: 850;
+      letter-spacing: -3.2px;
+      color: #0f172a;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    h2 {
+      margin: 0 0 30px;
+      font-size: 43px;
+      line-height: 1.18;
+      font-weight: 820;
+      letter-spacing: -2.1px;
+      color: #111827;
+      animation: fadeUp 0.65s ease both;
+    }
+
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 9px;
+      height: 34px;
+      margin-right: 16px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--blue), var(--sky));
+      vertical-align: -5px;
+    }
+
+    p {
+      margin: 12px 0;
+      font-size: 25px;
+      line-height: 1.62;
+      font-weight: 500;
+      letter-spacing: -0.55px;
+      color: rgba(31, 41, 55, 0.88);
+      animation: fadeUp 0.75s ease both;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 0;
+      list-style: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    li {
+      margin-bottom: 13px;
+      padding-left: 30px;
+      font-size: 23.5px;
+      line-height: 1.52;
+      font-weight: 500;
+      letter-spacing: -0.45px;
+      color: rgba(31, 41, 55, 0.86);
+      position: relative;
+      animation: fadeUp 0.75s ease both;
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 13px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--sky));
+      box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.1);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      margin-bottom: 24px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      color: rgba(37, 99, 235, 0.9);
+      font-size: 18px;
+      font-weight: 750;
+      letter-spacing: -0.25px;
+      backdrop-filter: blur(10px);
+      animation: fadeUp 0.55s ease both;
+    }
+
+    .tag::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 16px rgba(37, 99, 235, 0.55);
+    }
+
+    .subtitle {
+      font-size: 29px;
+      font-weight: 560;
+      letter-spacing: -0.9px;
+      color: rgba(71, 85, 105, 0.76);
+      margin-bottom: 36px;
+    }
+
+    .small {
+      font-size: 20px;
+      color: rgba(71, 85, 105, 0.62);
+      letter-spacing: -0.25px;
+    }
+
+    .source {
+      margin-top: 22px;
+      font-size: 18px;
+      color: rgba(71, 85, 105, 0.56);
+    }
+
+    .box {
+      margin-top: 24px;
+      padding: 24px 28px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(37, 99, 235, 0.13);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      backdrop-filter: blur(14px);
+      animation: cardIn 0.8s ease both;
+    }
+
+    .box p {
+      margin: 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cards.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      min-height: 150px;
+      padding: 24px 24px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(37, 99, 235, 0.13);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+      backdrop-filter: blur(14px);
+      animation: cardIn 0.8s ease both;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 26px 54px rgba(15, 23, 42, 0.12);
+    }
+
+    .card:nth-child(2) {
+      animation-delay: 0.08s;
+    }
+
+    .card:nth-child(3) {
+      animation-delay: 0.16s;
+    }
+
+    .card:nth-child(4) {
+      animation-delay: 0.24s;
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 16px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.14), rgba(56,189,248,0.16));
+      font-size: 22px;
+    }
+
+    .card-title {
+      margin: 0 0 8px;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.7px;
+      color: #111827;
+    }
+
+    .card-desc {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.48;
+      color: rgba(31, 41, 55, 0.66);
+      letter-spacing: -0.35px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 12px;
+      margin-top: 26px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pill {
+      padding: 10px 15px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      font-size: 18px;
+      font-weight: 650;
+      color: rgba(31, 41, 55, 0.62);
+      letter-spacing: -0.25px;
+      backdrop-filter: blur(10px);
+      animation: fadeUp 0.8s ease both;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border-radius: 24px;
+      font-size: 21px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(37, 99, 235, 0.14);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.07);
+      backdrop-filter: blur(14px);
+      animation: cardIn 0.8s ease both;
+    }
+
+    th, td {
+      padding: 18px 16px;
+      text-align: center;
+      line-height: 1.42;
+      border-bottom: 1px solid rgba(37, 99, 235, 0.11);
+      border-right: 1px solid rgba(37, 99, 235, 0.1);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: none;
+    }
+
+    th {
+      background: rgba(37, 99, 235, 0.08);
+      color: rgba(17, 24, 39, 0.86);
+      font-weight: 820;
+      letter-spacing: -0.4px;
+    }
+
+    td {
+      color: rgba(31, 41, 55, 0.78);
+      font-weight: 560;
+      letter-spacing: -0.35px;
+    }
+
+    .controls {
+      position: fixed;
+      bottom: 22px;
+      left: 36px;
+      display: flex;
+      gap: 9px;
+      z-index: 10;
+    }
+
+    button {
+      border: 1px solid rgba(255,255,255,0.34);
+      padding: 10px 15px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.38);
+      color: white;
+      font-size: 14px;
+      font-family: "Pretendard", sans-serif;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      background: rgba(37, 99, 235, 0.75);
+      transform: translateY(-2px);
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 25px;
+      right: 36px;
+      z-index: 10;
+      font-size: 16px;
+      font-weight: 650;
+      color: rgba(15, 23, 42, 0.52);
+      letter-spacing: -0.2px;
+    }
+
+    .progress-wrap {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 5px;
+      background: rgba(15, 23, 42, 0.08);
+      z-index: 11;
+    }
+
+    .progress {
+      height: 100%;
+      width: 6.66%;
+      background: linear-gradient(90deg, var(--blue), var(--sky), var(--violet));
+      transition: width 0.35s ease;
+    }
+
+    .dots {
+      position: absolute;
+      right: 92px;
+      bottom: 92px;
+      display: grid;
+      grid-template-columns: repeat(4, 10px);
+      gap: 12px;
+      opacity: 0.45;
+      z-index: 0;
+    }
+
+    .dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.5);
+    }
+
+    .center {
+      text-align: center;
+      align-items: center;
+    }
+
+    .center h1 {
+      font-size: 76px;
+    }
+
+    .center h2::before {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 1장 -->
+  <section class="slide active center">
+    <span class="tag">AI와 비즈니스 애플리케이션</span>
+    <h1>깃허브 활용 가이드<br>2026(7팀)</h1>
+    <p class="subtitle">바이브 코딩 HTML 발표자료 및 GitHub Pages 실습</p>
+    <div class="hero-meta">
+      <span class="pill">7팀</span>
+      <span class="pill">Repository: vibe-coding</span>
+      <span class="pill">HTML Presentation</span>
+    </div>
+    <div class="dots">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </section>
+
+  <!-- 2장 -->
+  <section class="slide">
+    <span class="tag">Vibe Coding</span>
+    <h2>1. 바이브 코딩이란?</h2>
+    <p>
+      바이브 코딩은 사람이 직접 모든 코드를 작성하기보다,
+      생성형 인공지능에게 원하는 기능과 목적을 자연어로 설명하고
+      AI가 만들어 준 코드를 활용하여 프로그램을 완성하는 방식이다.
+    </p>
+    <div class="box">
+      <p>
+        핵심은 코드를 모두 외우는 것이 아니라,
+        원하는 결과를 명확히 설명하고 AI의 결과물을 검토하며 개선하는 것이다.
+      </p>
+    </div>
+    <p class="source">참고: 한국어 위키백과 「바이브 코딩」</p>
+  </section>
+
+  <!-- 3장 -->
+  <section class="slide">
+    <span class="tag">Background</span>
+    <h2>2. 등장 배경</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🤖</div>
+        <p class="card-title">생성형 AI 발전</p>
+        <p class="card-desc">ChatGPT, GitHub Copilot 같은 AI 도구가 코드 작성 과정을 도와준다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">💬</div>
+        <p class="card-title">자연어 기반 요청</p>
+        <p class="card-desc">전문 문법을 모두 알지 않아도 말로 원하는 기능을 설명할 수 있다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🚀</div>
+        <p class="card-title">빠른 결과물 제작</p>
+        <p class="card-desc">아이디어를 짧은 시간 안에 웹페이지나 프로그램 초안으로 만들 수 있다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4장 -->
+  <section class="slide">
+    <span class="tag">Comparison</span>
+    <h2>3. 기존 코딩 방식과의 차이</h2>
+    <table>
+      <tr>
+        <th>구분</th>
+        <th>기존 코딩</th>
+        <th>바이브 코딩</th>
+      </tr>
+      <tr>
+        <td>작업 방식</td>
+        <td>사람이 직접 코드 작성</td>
+        <td>AI에게 요청 후 코드 생성</td>
+      </tr>
+      <tr>
+        <td>중요 능력</td>
+        <td>문법, 알고리즘, 구현 능력</td>
+        <td>프롬프트 작성, 검토, 수정 능력</td>
+      </tr>
+      <tr>
+        <td>개발 속도</td>
+        <td>상대적으로 오래 걸림</td>
+        <td>초안 제작이 빠름</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 5장 -->
+  <section class="slide">
+    <span class="tag">Process</span>
+    <h2>4. 바이브 코딩의 핵심 과정</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">①</div>
+        <p class="card-title">요구사항 설명</p>
+        <p class="card-desc">만들고 싶은 결과물을 자연어로 구체적으로 설명한다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">②</div>
+        <p class="card-title">AI 코드 생성</p>
+        <p class="card-desc">AI가 HTML, CSS, JavaScript 등의 코드를 제안한다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">③</div>
+        <p class="card-title">검토와 수정</p>
+        <p class="card-desc">실행 결과를 확인하고 부족한 부분을 다시 요청한다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6장 -->
+  <section class="slide">
+    <span class="tag">Role of AI</span>
+    <h2>5. 생성형 AI의 역할</h2>
+    <p>
+      생성형 AI는 사용자의 요구사항을 해석하고, 그에 맞는 코드 초안을 빠르게 작성한다.
+      또한 코드 설명, 오류 수정, 디자인 개선, 기능 추가 등 다양한 작업을 도와준다.
+    </p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🧩</div>
+        <p class="card-title">구조 작성</p>
+        <p class="card-desc">웹페이지의 기본 구조와 흐름을 만든다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎨</div>
+        <p class="card-title">디자인 제안</p>
+        <p class="card-desc">CSS 스타일과 화면 구성을 제안한다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔍</div>
+        <p class="card-title">오류 분석</p>
+        <p class="card-desc">오류 메시지를 해석하고 해결 방향을 제시한다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7장 -->
+  <section class="slide">
+    <span class="tag">Human Role</span>
+    <h2>6. 개발자의 역할 변화</h2>
+    <ul>
+      <li>단순히 코드를 입력하는 사람에서, AI 결과물을 판단하는 검토자로 역할이 확장된다.</li>
+      <li>AI에게 명확하고 구체적인 요청을 전달하는 프롬프트 작성 능력이 중요해진다.</li>
+      <li>생성된 코드가 실제로 작동하는지 확인하고, 목적에 맞게 수정해야 한다.</li>
+      <li>오류, 보안 문제, 저작권 문제를 최종적으로 검토하는 책임은 사용자에게 있다.</li>
+    </ul>
+  </section>
+
+  <!-- 8장 -->
+  <section class="slide">
+    <span class="tag">Strength</span>
+    <h2>7. 바이브 코딩의 장점</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">⚡</div>
+        <p class="card-title">빠른 제작</p>
+        <p class="card-desc">아이디어를 짧은 시간 안에 결과물로 만들 수 있다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🌱</div>
+        <p class="card-title">낮은 진입 장벽</p>
+        <p class="card-desc">코딩 초보자도 웹페이지나 간단한 앱을 제작할 수 있다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔁</div>
+        <p class="card-title">반복 작업 감소</p>
+        <p class="card-desc">반복적인 코드 작성 시간을 줄이고 수정에 집중할 수 있다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9장 -->
+  <section class="slide">
+    <span class="tag">Limitations</span>
+    <h2>8. 바이브 코딩의 한계</h2>
+    <ul>
+      <li>AI가 항상 정확하거나 안전한 코드를 만드는 것은 아니다.</li>
+      <li>사용자가 내용을 이해하지 못하면 오류를 발견하기 어렵다.</li>
+      <li>복잡한 시스템에서는 AI가 만든 코드만으로 완성하기 어렵다.</li>
+      <li>개인정보나 기업 기밀을 AI 서비스에 입력하면 위험할 수 있다.</li>
+      <li>출처가 불명확한 코드 사용 시 저작권 문제가 생길 수 있다.</li>
+    </ul>
+  </section>
+
+  <!-- 10장 -->
+  <section class="slide">
+    <span class="tag">Use Cases</span>
+    <h2>9. 실제 활용 예시</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🖥️</div>
+        <p class="card-title">HTML 발표자료</p>
+        <p class="card-desc">수업 발표용 웹 슬라이드를 빠르게 제작할 수 있다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📊</div>
+        <p class="card-title">데이터 정리</p>
+        <p class="card-desc">표와 그래프를 만드는 코드 초안을 작성할 수 있다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">💼</div>
+        <p class="card-title">업무 자동화</p>
+        <p class="card-desc">반복 업무를 자동화하는 간단한 스크립트를 만들 수 있다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11장 -->
+  <section class="slide">
+    <span class="tag">Business</span>
+    <h2>10. 비즈니스에서의 활용</h2>
+    <p>
+      기업에서는 새로운 서비스를 개발하기 전에 간단한 시제품을 빠르게 만들어
+      아이디어를 검증할 수 있다. 또한 업무 자동화, 데이터 분석, 고객 응대 시스템 등
+      다양한 비즈니스 애플리케이션 제작에 활용할 수 있다.
+    </p>
+    <div class="box">
+      <p>
+        예를 들어, 작은 회사도 예약 관리 페이지, 문의 응답 시스템,
+        내부 보고서 자동화 도구를 빠르게 제작할 수 있다.
+      </p>
+    </div>
+  </section>
+
+  <!-- 12장 -->
+  <section class="slide">
+    <span class="tag">GitHub</span>
+    <h2>11. GitHub란?</h2>
+    <p>
+      GitHub는 소스 코드와 파일을 저장하고 관리할 수 있는 온라인 플랫폼이다.
+      개발자는 GitHub를 활용해 파일 변경 기록을 남기고, 다른 사람과 협업하며,
+      프로젝트 결과물을 체계적으로 관리할 수 있다.
+    </p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">📁</div>
+        <p class="card-title">리포지터리</p>
+        <p class="card-desc">프로젝트 파일을 보관하는 공간이다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📝</div>
+        <p class="card-title">커밋</p>
+        <p class="card-desc">파일 변경 기록을 저장하는 과정이다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🤝</div>
+        <p class="card-title">협업</p>
+        <p class="card-desc">팀원이 함께 파일을 수정하고 관리할 수 있다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13장 -->
+  <section class="slide">
+    <span class="tag">GitHub Pages</span>
+    <h2>12. GitHub Pages 게시</h2>
+    <p>
+      GitHub Pages는 GitHub 리포지터리에 올린 HTML 파일을 웹사이트처럼
+      공개할 수 있게 해주는 기능이다.
+    </p>
+    <ul>
+      <li>개인 리포지터리 이름: vibe-coding</li>
+      <li>팀 협업 리포지터리 이름: vibe-coding-team</li>
+      <li>기본 파일 이름: index.html</li>
+      <li>게시 방식: Settings → Pages → Deploy from a branch</li>
+    </ul>
+  </section>
+
+  <!-- 14장 -->
+  <section class="slide">
+    <span class="tag">Summary</span>
+    <h2>13. 정리 및 주의할 점</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">✅</div>
+        <p class="card-title">검토 필요</p>
+        <p class="card-desc">AI가 만든 내용을 그대로 제출하지 말고 반드시 확인해야 한다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📄</div>
+        <p class="card-title">파일 이름</p>
+        <p class="card-desc">GitHub Pages를 위해 파일 이름은 index.html로 저장한다.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔒</div>
+        <p class="card-title">정보 보호</p>
+        <p class="card-desc">개인정보, 비밀번호, 민감한 자료는 코드에 포함하지 않는다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15장 -->
+  <section class="slide center">
+    <span class="tag">End</span>
+    <h1>감사합니다</h1>
+    <p class="subtitle">깃허브 활용 가이드 2026(7팀)</p>
+    <div class="hero-meta">
+      <span class="pill">7팀</span>
+      <span class="pill">vibe-coding</span>
+      <span class="pill">Q & A</span>
+    </div>
+    <div class="dots">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button onclick="prevSlide()">이전</button>
+    <button onclick="nextSlide()">다음</button>
+  </div>
+
+  <div class="footer">
+    <span id="pageNumber">1</span> / 15
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress" id="progress"></div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll(".slide");
+    const pageNumber = document.getElementById("pageNumber");
+    const progress = document.getElementById("progress");
+    let current = 0;
+
+    function showSlide(index) {
+      slides[current].classList.remove("active");
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add("active");
+
+      pageNumber.textContent = current + 1;
+      progress.style.width = ((current + 1) / slides.length * 100) + "%";
+    }
+
+    function nextSlide() {
+      showSlide(current + 1);
+    }
+
+    function prevSlide() {
+      showSlide(current - 1);
+    }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "ArrowRight" || event.key === " ") {
+        nextSlide();
+      } else if (event.key === "ArrowLeft") {
+        prevSlide();
+      }
+    });
+  </script>
+
+</body>
+</html>
+```
