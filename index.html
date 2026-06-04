@@ -1,5 +1,5 @@
-```html
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
@@ -19,8 +19,6 @@
       --sky: #38bdf8;
       --violet: #8b5cf6;
       --text: #172033;
-      --muted: rgba(23, 32, 51, 0.68);
-      --soft: rgba(255, 255, 255, 0.72);
       --border: rgba(37, 99, 235, 0.14);
     }
 
@@ -37,7 +35,7 @@
       position: relative;
       width: 100vw;
       height: 100vh;
-      padding: 72px 92px;
+      padding: 64px 92px;
       overflow: hidden;
       background:
         radial-gradient(circle at 18% 22%, rgba(56, 189, 248, 0.16), transparent 28%),
@@ -47,8 +45,20 @@
 
     .slide.active {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       justify-content: center;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .content.center {
+      text-align: center;
     }
 
     .bg-grid {
@@ -64,7 +74,7 @@
 
     .shape {
       position: absolute;
-      z-index: 0;
+      z-index: 1;
       pointer-events: none;
     }
 
@@ -139,8 +149,6 @@
     }
 
     h1, h2, p, li, table, .tag, .card, .box {
-      position: relative;
-      z-index: 1;
       word-break: keep-all;
       overflow-wrap: normal;
     }
@@ -150,13 +158,13 @@
       font-size: 58px;
       line-height: 1.16;
       font-weight: 850;
-      letter-spacing: -1.4px;
+      letter-spacing: -1.2px;
       color: #101828;
     }
 
     .hero-title {
       font-size: 60px;
-      letter-spacing: -1.2px;
+      letter-spacing: -1px;
       white-space: nowrap;
     }
 
@@ -165,7 +173,7 @@
       font-size: 42px;
       line-height: 1.2;
       font-weight: 820;
-      letter-spacing: -0.8px;
+      letter-spacing: -0.6px;
       color: #101828;
     }
 
@@ -185,7 +193,7 @@
       font-size: 23px;
       line-height: 1.48;
       font-weight: 500;
-      letter-spacing: -0.25px;
+      letter-spacing: -0.18px;
       color: rgba(23, 32, 51, 0.82);
     }
 
@@ -193,22 +201,16 @@
       max-width: 980px;
       font-size: 25px;
       line-height: 1.5;
-      letter-spacing: -0.2px;
+      letter-spacing: -0.15px;
     }
 
     .subtitle {
       font-size: 28px;
       line-height: 1.35;
       font-weight: 560;
-      letter-spacing: -0.35px;
+      letter-spacing: -0.3px;
       color: rgba(71, 85, 105, 0.72);
-      margin-bottom: 22px;
-    }
-
-    .small {
-      font-size: 19px;
-      color: rgba(71, 85, 105, 0.58);
-      letter-spacing: -0.1px;
+      margin-bottom: 24px;
     }
 
     .source {
@@ -221,8 +223,6 @@
       margin: 0;
       padding-left: 0;
       list-style: none;
-      position: relative;
-      z-index: 1;
       max-width: 1080px;
     }
 
@@ -232,7 +232,7 @@
       font-size: 22px;
       line-height: 1.42;
       font-weight: 520;
-      letter-spacing: -0.18px;
+      letter-spacing: -0.15px;
       color: rgba(23, 32, 51, 0.80);
       position: relative;
     }
@@ -262,7 +262,7 @@
       color: rgba(37, 99, 235, 0.92);
       font-size: 18px;
       font-weight: 760;
-      letter-spacing: -0.1px;
+      letter-spacing: -0.05px;
       backdrop-filter: blur(10px);
     }
 
@@ -273,6 +273,22 @@
       border-radius: 50%;
       background: var(--blue);
       box-shadow: 0 0 16px rgba(37, 99, 235, 0.45);
+    }
+
+    .team-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 28px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(37, 99, 235, 0.14);
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.07);
+      color: rgba(23, 32, 51, 0.66);
+      font-size: 20px;
+      font-weight: 760;
+      backdrop-filter: blur(12px);
     }
 
     .box {
@@ -296,8 +312,6 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      position: relative;
-      z-index: 1;
       max-width: 1120px;
     }
 
@@ -333,7 +347,7 @@
       font-size: 22px;
       line-height: 1.25;
       font-weight: 800;
-      letter-spacing: -0.35px;
+      letter-spacing: -0.3px;
       color: #101828;
     }
 
@@ -342,7 +356,7 @@
       font-size: 18.5px;
       line-height: 1.38;
       color: rgba(23, 32, 51, 0.64);
-      letter-spacing: -0.1px;
+      letter-spacing: -0.08px;
     }
 
     table {
@@ -385,22 +399,6 @@
     td {
       color: rgba(23, 32, 51, 0.78);
       font-weight: 560;
-    }
-
-    .center {
-      align-items: center;
-      text-align: center;
-    }
-
-    .center h2::before {
-      display: none;
-    }
-
-    .team-line {
-      margin-top: 10px;
-      font-size: 22px;
-      color: rgba(71, 85, 105, 0.66);
-      font-weight: 650;
     }
 
     .controls {
@@ -457,353 +455,412 @@
       transition: width 0.25s ease;
     }
   </style>
+
 </head>
 
 <body>
 
-  <!-- 1장 -->
-  <section class="slide active center">
+  <section class="slide active">
     <div class="bg-grid"></div>
     <div class="shape orb" style="right: -90px; top: -90px;"></div>
     <div class="shape ring" style="left: 70px; bottom: 86px;"></div>
     <div class="shape line" style="right: 210px; bottom: 130px;"></div>
 
-    <span class="tag">AI와비즈니스애플리케이션</span>
-    <h1 class="hero-title">깃허브 활용 가이드 2026(7팀)</h1>
-    <p class="subtitle">바이브 코딩 HTML 발표자료 및 GitHub Pages 실습</p>
-    <p class="team-line">7팀 · Repository: vibe-coding</p>
+```
+<div class="content center">
+  <span class="tag">AI와비즈니스애플리케이션</span>
+  <h1 class="hero-title">깃허브 활용 가이드 2026(7팀)</h1>
+  <p class="subtitle">바이브 코딩 HTML 발표자료 및 GitHub Pages 실습</p>
+  <span class="team-pill">7팀</span>
+</div>
+```
+
   </section>
 
-  <!-- 2장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape orb small" style="right: 120px; top: 96px;"></div>
     <div class="shape ring" style="right: 120px; bottom: 88px;"></div>
 
-    <span class="tag">Vibe Coding</span>
-    <h2>1. 바이브 코딩이란?</h2>
-    <p class="lead">
-      바이브 코딩은 사람이 모든 코드를 직접 작성하기보다,<br>
-      생성형 인공지능에게 원하는 기능과 목적을 설명한 뒤<br>
-      AI가 만든 코드를 활용해 프로그램을 완성하는 방식이다.
+```
+<div class="content">
+  <span class="tag">Vibe Coding</span>
+  <h2>1. 바이브 코딩이란?</h2>
+  <p class="lead">
+    바이브 코딩은 사람이 모든 코드를 직접 작성하기보다,<br>
+    생성형 인공지능에게 원하는 기능과 목적을 설명한 뒤<br>
+    AI가 만든 코드를 활용해 프로그램을 완성하는 방식이다.
+  </p>
+  <div class="box">
+    <p>
+      핵심은 코드를 모두 외우는 것이 아니라,<br>
+      원하는 결과를 명확히 설명하고 AI의 결과물을 검토하며 개선하는 것이다.
     </p>
-    <div class="box">
-      <p>
-        핵심은 코드를 모두 외우는 것이 아니라,<br>
-        원하는 결과를 명확히 설명하고 AI의 결과물을 검토하며 개선하는 것이다.
-      </p>
-    </div>
-    <p class="source">참고: 한국어 위키백과 「바이브 코딩」</p>
+  </div>
+  <p class="source">참고: 한국어 위키백과 「바이브 코딩」</p>
+</div>
+```
+
   </section>
 
-  <!-- 3장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape line" style="left: 84px; top: 128px;"></div>
     <div class="shape mini-dots" style="right: 120px; bottom: 110px;"></div>
 
-    <span class="tag">Background</span>
-    <h2>2. 등장 배경</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">🤖</div>
-        <p class="card-title">생성형 AI 발전</p>
-        <p class="card-desc">ChatGPT, GitHub Copilot 같은 AI 도구가 코드 작성 과정을 돕는다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">💬</div>
-        <p class="card-title">자연어 기반 요청</p>
-        <p class="card-desc">전문 문법을 모두 알지 않아도 원하는 기능을 말로 설명할 수 있다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🚀</div>
-        <p class="card-title">빠른 결과물 제작</p>
-        <p class="card-desc">아이디어를 짧은 시간 안에 웹페이지나 프로그램 초안으로 만들 수 있다.</p>
-      </div>
+```
+<div class="content">
+  <span class="tag">Background</span>
+  <h2>2. 등장 배경</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🤖</div>
+      <p class="card-title">생성형 AI 발전</p>
+      <p class="card-desc">ChatGPT, GitHub Copilot 같은 AI 도구가 코드 작성 과정을 돕는다.</p>
     </div>
+    <div class="card">
+      <div class="icon">💬</div>
+      <p class="card-title">자연어 기반 요청</p>
+      <p class="card-desc">전문 문법을 모두 알지 않아도 원하는 기능을 말로 설명할 수 있다.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🚀</div>
+      <p class="card-title">빠른 결과물 제작</p>
+      <p class="card-desc">아이디어를 짧은 시간 안에 웹페이지나 프로그램 초안으로 만들 수 있다.</p>
+    </div>
+  </div>
+</div>
+```
+
   </section>
 
-  <!-- 4장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape orb small" style="left: 92px; bottom: 92px;"></div>
     <div class="shape line" style="right: 150px; top: 130px;"></div>
 
-    <span class="tag">Comparison</span>
-    <h2>3. 기존 코딩 방식과의 차이</h2>
-    <table>
-      <tr>
-        <th>구분</th>
-        <th>기존 코딩</th>
-        <th>바이브 코딩</th>
-      </tr>
-      <tr>
-        <td>작업 방식</td>
-        <td>사람이 직접 코드 작성</td>
-        <td>AI에게 요청 후 코드 생성</td>
-      </tr>
-      <tr>
-        <td>중요 능력</td>
-        <td>문법, 알고리즘, 구현 능력</td>
-        <td>프롬프트 작성, 검토, 수정 능력</td>
-      </tr>
-      <tr>
-        <td>개발 속도</td>
-        <td>상대적으로 오래 걸림</td>
-        <td>초안 제작이 빠름</td>
-      </tr>
-    </table>
+```
+<div class="content">
+  <span class="tag">Comparison</span>
+  <h2>3. 기존 코딩 방식과의 차이</h2>
+  <table>
+    <tr>
+      <th>구분</th>
+      <th>기존 코딩</th>
+      <th>바이브 코딩</th>
+    </tr>
+    <tr>
+      <td>작업 방식</td>
+      <td>사람이 직접 코드 작성</td>
+      <td>AI에게 요청 후 코드 생성</td>
+    </tr>
+    <tr>
+      <td>중요 능력</td>
+      <td>문법, 알고리즘, 구현 능력</td>
+      <td>프롬프트 작성, 검토, 수정 능력</td>
+    </tr>
+    <tr>
+      <td>개발 속도</td>
+      <td>상대적으로 오래 걸림</td>
+      <td>초안 제작이 빠름</td>
+    </tr>
+  </table>
+</div>
+```
+
   </section>
 
-  <!-- 5장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape ring" style="right: 80px; top: 84px;"></div>
 
-    <span class="tag">Process</span>
-    <h2>4. 바이브 코딩의 핵심 과정</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">①</div>
-        <p class="card-title">요구사항 설명</p>
-        <p class="card-desc">만들고 싶은 결과물을 자연어로 구체적으로 설명한다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">②</div>
-        <p class="card-title">AI 코드 생성</p>
-        <p class="card-desc">AI가 HTML, CSS, JavaScript 등의 코드를 제안한다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">③</div>
-        <p class="card-title">검토와 수정</p>
-        <p class="card-desc">실행 결과를 확인하고 부족한 부분을 다시 요청한다.</p>
-      </div>
+```
+<div class="content">
+  <span class="tag">Process</span>
+  <h2>4. 바이브 코딩의 핵심 과정</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">①</div>
+      <p class="card-title">요구사항 설명</p>
+      <p class="card-desc">만들고 싶은 결과물을 자연어로 구체적으로 설명한다.</p>
     </div>
+    <div class="card">
+      <div class="icon">②</div>
+      <p class="card-title">AI 코드 생성</p>
+      <p class="card-desc">AI가 HTML, CSS, JavaScript 등의 코드를 제안한다.</p>
+    </div>
+    <div class="card">
+      <div class="icon">③</div>
+      <p class="card-title">검토와 수정</p>
+      <p class="card-desc">실행 결과를 확인하고 부족한 부분을 다시 요청한다.</p>
+    </div>
+  </div>
+</div>
+```
+
   </section>
 
-  <!-- 6장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape mini-dots" style="left: 84px; bottom: 98px;"></div>
     <div class="shape orb small" style="right: 110px; top: 96px;"></div>
 
-    <span class="tag">Role of AI</span>
-    <h2>5. 생성형 AI의 역할</h2>
-    <p class="lead">
-      생성형 AI는 사용자의 요구사항을 해석하고,<br>
-      그에 맞는 코드 초안을 빠르게 작성한다.
-    </p>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">🧩</div>
-        <p class="card-title">구조 작성</p>
-        <p class="card-desc">웹페이지의 기본 구조와 흐름을 만든다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🎨</div>
-        <p class="card-title">디자인 제안</p>
-        <p class="card-desc">CSS 스타일과 화면 구성을 제안한다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🔍</div>
-        <p class="card-title">오류 분석</p>
-        <p class="card-desc">오류 메시지를 해석하고 해결 방향을 제시한다.</p>
-      </div>
+```
+<div class="content">
+  <span class="tag">Role of AI</span>
+  <h2>5. 생성형 AI의 역할</h2>
+  <p class="lead">
+    생성형 AI는 사용자의 요구사항을 해석하고,<br>
+    그에 맞는 코드 초안을 빠르게 작성한다.
+  </p>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🧩</div>
+      <p class="card-title">구조 작성</p>
+      <p class="card-desc">웹페이지의 기본 구조와 흐름을 만든다.</p>
     </div>
+    <div class="card">
+      <div class="icon">🎨</div>
+      <p class="card-title">디자인 제안</p>
+      <p class="card-desc">CSS 스타일과 화면 구성을 제안한다.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔍</div>
+      <p class="card-title">오류 분석</p>
+      <p class="card-desc">오류 메시지를 해석하고 해결 방향을 제시한다.</p>
+    </div>
+  </div>
+</div>
+```
+
   </section>
 
-  <!-- 7장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape line" style="left: 80px; bottom: 120px;"></div>
     <div class="shape ring" style="right: 100px; bottom: 92px;"></div>
 
-    <span class="tag">Human Role</span>
-    <h2>6. 개발자의 역할 변화</h2>
-    <ul>
-      <li>단순히 코드를 입력하는 사람에서 AI 결과물을 판단하는 검토자로 역할이 확장된다.</li>
-      <li>AI에게 명확하고 구체적인 요청을 전달하는 프롬프트 작성 능력이 중요해진다.</li>
-      <li>생성된 코드가 실제로 작동하는지 확인하고 목적에 맞게 수정해야 한다.</li>
-      <li>오류, 보안 문제, 저작권 문제를 최종적으로 검토하는 책임은 사용자에게 있다.</li>
-    </ul>
+```
+<div class="content">
+  <span class="tag">Human Role</span>
+  <h2>6. 개발자의 역할 변화</h2>
+  <ul>
+    <li>단순히 코드를 입력하는 사람에서 AI 결과물을 판단하는 검토자로 역할이 확장된다.</li>
+    <li>AI에게 명확하고 구체적인 요청을 전달하는 프롬프트 작성 능력이 중요해진다.</li>
+    <li>생성된 코드가 실제로 작동하는지 확인하고 목적에 맞게 수정해야 한다.</li>
+    <li>오류, 보안 문제, 저작권 문제를 최종적으로 검토하는 책임은 사용자에게 있다.</li>
+  </ul>
+</div>
+```
+
   </section>
 
-  <!-- 8장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape orb small" style="right: 110px; bottom: 110px;"></div>
 
-    <span class="tag">Strength</span>
-    <h2>7. 바이브 코딩의 장점</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">⚡</div>
-        <p class="card-title">빠른 제작</p>
-        <p class="card-desc">아이디어를 짧은 시간 안에 결과물로 만들 수 있다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🌱</div>
-        <p class="card-title">낮은 진입 장벽</p>
-        <p class="card-desc">코딩 초보자도 웹페이지나 간단한 앱을 제작할 수 있다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🔁</div>
-        <p class="card-title">반복 작업 감소</p>
-        <p class="card-desc">반복적인 코드 작성 시간을 줄이고 수정에 집중할 수 있다.</p>
-      </div>
+```
+<div class="content">
+  <span class="tag">Strength</span>
+  <h2>7. 바이브 코딩의 장점</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">⚡</div>
+      <p class="card-title">빠른 제작</p>
+      <p class="card-desc">아이디어를 짧은 시간 안에 결과물로 만들 수 있다.</p>
     </div>
+    <div class="card">
+      <div class="icon">🌱</div>
+      <p class="card-title">낮은 진입 장벽</p>
+      <p class="card-desc">코딩 초보자도 웹페이지나 간단한 앱을 제작할 수 있다.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔁</div>
+      <p class="card-title">반복 작업 감소</p>
+      <p class="card-desc">반복적인 코드 작성 시간을 줄이고 수정에 집중할 수 있다.</p>
+    </div>
+  </div>
+</div>
+```
+
   </section>
 
-  <!-- 9장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape mini-dots" style="right: 115px; top: 120px;"></div>
     <div class="shape line" style="left: 90px; bottom: 110px;"></div>
 
-    <span class="tag">Limitations</span>
-    <h2>8. 바이브 코딩의 한계</h2>
-    <ul>
-      <li>AI가 항상 정확하거나 안전한 코드를 만드는 것은 아니다.</li>
-      <li>사용자가 내용을 이해하지 못하면 오류를 발견하기 어렵다.</li>
-      <li>복잡한 시스템에서는 AI가 만든 코드만으로 완성하기 어렵다.</li>
-      <li>개인정보나 기업 기밀을 AI 서비스에 입력하면 위험할 수 있다.</li>
-      <li>출처가 불명확한 코드 사용 시 저작권 문제가 생길 수 있다.</li>
-    </ul>
+```
+<div class="content">
+  <span class="tag">Limitations</span>
+  <h2>8. 바이브 코딩의 한계</h2>
+  <ul>
+    <li>AI가 항상 정확하거나 안전한 코드를 만드는 것은 아니다.</li>
+    <li>사용자가 내용을 이해하지 못하면 오류를 발견하기 어렵다.</li>
+    <li>복잡한 시스템에서는 AI가 만든 코드만으로 완성하기 어렵다.</li>
+    <li>개인정보나 기업 기밀을 AI 서비스에 입력하면 위험할 수 있다.</li>
+    <li>출처가 불명확한 코드 사용 시 저작권 문제가 생길 수 있다.</li>
+  </ul>
+</div>
+```
+
   </section>
 
-  <!-- 10장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape ring" style="left: 82px; bottom: 88px;"></div>
 
-    <span class="tag">Use Cases</span>
-    <h2>9. 실제 활용 예시</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">🖥️</div>
-        <p class="card-title">HTML 발표자료</p>
-        <p class="card-desc">수업 발표용 웹 슬라이드를 빠르게 제작할 수 있다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">📊</div>
-        <p class="card-title">데이터 정리</p>
-        <p class="card-desc">표와 그래프를 만드는 코드 초안을 작성할 수 있다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">💼</div>
-        <p class="card-title">업무 자동화</p>
-        <p class="card-desc">반복 업무를 자동화하는 간단한 스크립트를 만들 수 있다.</p>
-      </div>
+```
+<div class="content">
+  <span class="tag">Use Cases</span>
+  <h2>9. 실제 활용 예시</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🖥️</div>
+      <p class="card-title">HTML 발표자료</p>
+      <p class="card-desc">수업 발표용 웹 슬라이드를 빠르게 제작할 수 있다.</p>
     </div>
+    <div class="card">
+      <div class="icon">📊</div>
+      <p class="card-title">데이터 정리</p>
+      <p class="card-desc">표와 그래프를 만드는 코드 초안을 작성할 수 있다.</p>
+    </div>
+    <div class="card">
+      <div class="icon">💼</div>
+      <p class="card-title">업무 자동화</p>
+      <p class="card-desc">반복 업무를 자동화하는 간단한 스크립트를 만들 수 있다.</p>
+    </div>
+  </div>
+</div>
+```
+
   </section>
 
-  <!-- 11장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape orb small" style="right: 95px; top: 90px;"></div>
     <div class="shape line" style="right: 170px; bottom: 122px;"></div>
 
-    <span class="tag">Business</span>
-    <h2>10. 비즈니스에서의 활용</h2>
-    <p class="lead">
-      기업에서는 새로운 서비스를 개발하기 전에<br>
-      간단한 시제품을 빠르게 만들어 아이디어를 검증할 수 있다.
+```
+<div class="content">
+  <span class="tag">Business</span>
+  <h2>10. 비즈니스에서의 활용</h2>
+  <p class="lead">
+    기업에서는 새로운 서비스를 개발하기 전에<br>
+    간단한 시제품을 빠르게 만들어 아이디어를 검증할 수 있다.
+  </p>
+  <div class="box">
+    <p>
+      예를 들어 예약 관리 페이지, 문의 응답 시스템,<br>
+      내부 보고서 자동화 도구 등을 빠르게 제작할 수 있다.
     </p>
-    <div class="box">
-      <p>
-        예를 들어 예약 관리 페이지, 문의 응답 시스템,<br>
-        내부 보고서 자동화 도구 등을 빠르게 제작할 수 있다.
-      </p>
-    </div>
+  </div>
+</div>
+```
+
   </section>
 
-  <!-- 12장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape mini-dots" style="left: 84px; bottom: 100px;"></div>
 
-    <span class="tag">GitHub</span>
-    <h2>11. GitHub란?</h2>
-    <p class="lead">
-      GitHub는 소스 코드와 파일을 저장하고 관리할 수 있는 온라인 플랫폼이다.<br>
-      파일 변경 기록을 남기고, 협업하며, 프로젝트 결과물을 체계적으로 관리할 수 있다.
-    </p>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">📁</div>
-        <p class="card-title">리포지터리</p>
-        <p class="card-desc">프로젝트 파일을 보관하는 공간이다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">📝</div>
-        <p class="card-title">커밋</p>
-        <p class="card-desc">파일 변경 기록을 저장하는 과정이다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🤝</div>
-        <p class="card-title">협업</p>
-        <p class="card-desc">팀원이 함께 파일을 수정하고 관리할 수 있다.</p>
-      </div>
+```
+<div class="content">
+  <span class="tag">GitHub</span>
+  <h2>11. GitHub란?</h2>
+  <p class="lead">
+    GitHub는 소스 코드와 파일을 저장하고 관리할 수 있는 온라인 플랫폼이다.<br>
+    파일 변경 기록을 남기고, 협업하며, 프로젝트 결과물을 체계적으로 관리할 수 있다.
+  </p>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">📁</div>
+      <p class="card-title">리포지터리</p>
+      <p class="card-desc">프로젝트 파일을 보관하는 공간이다.</p>
     </div>
+    <div class="card">
+      <div class="icon">📝</div>
+      <p class="card-title">커밋</p>
+      <p class="card-desc">파일 변경 기록을 저장하는 과정이다.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🤝</div>
+      <p class="card-title">협업</p>
+      <p class="card-desc">팀원이 함께 파일을 수정하고 관리할 수 있다.</p>
+    </div>
+  </div>
+</div>
+```
+
   </section>
 
-  <!-- 13장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape ring" style="right: 86px; top: 92px;"></div>
     <div class="shape line" style="left: 90px; bottom: 120px;"></div>
 
-    <span class="tag">GitHub Pages</span>
-    <h2>12. GitHub Pages 게시</h2>
-    <p class="lead">
-      GitHub Pages는 GitHub 리포지터리에 올린 HTML 파일을<br>
-      웹사이트처럼 공개할 수 있게 해주는 기능이다.
-    </p>
-    <ul>
-      <li>개인 리포지터리 이름: vibe-coding</li>
-      <li>팀 협업 리포지터리 이름: vibe-coding-team</li>
-      <li>기본 파일 이름: index.html</li>
-      <li>게시 방식: Settings → Pages → Deploy from a branch</li>
-    </ul>
+```
+<div class="content">
+  <span class="tag">GitHub Pages</span>
+  <h2>12. GitHub Pages 게시</h2>
+  <p class="lead">
+    GitHub Pages는 GitHub 리포지터리에 올린 HTML 파일을<br>
+    웹사이트처럼 공개할 수 있게 해주는 기능이다.
+  </p>
+  <ul>
+    <li>개인 리포지터리 이름: vibe-coding</li>
+    <li>팀 협업 리포지터리 이름: vibe-coding-team</li>
+    <li>기본 파일 이름: index.html</li>
+    <li>게시 방식: Settings → Pages → Deploy from a branch</li>
+  </ul>
+</div>
+```
+
   </section>
 
-  <!-- 14장 -->
   <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape orb small" style="left: 92px; bottom: 96px;"></div>
 
-    <span class="tag">Summary</span>
-    <h2>13. 정리 및 주의할 점</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">✅</div>
-        <p class="card-title">검토 필요</p>
-        <p class="card-desc">AI가 만든 내용을 그대로 제출하지 말고 반드시 확인해야 한다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">📄</div>
-        <p class="card-title">파일 이름</p>
-        <p class="card-desc">GitHub Pages를 위해 파일 이름은 index.html로 저장한다.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🔒</div>
-        <p class="card-title">정보 보호</p>
-        <p class="card-desc">개인정보, 비밀번호, 민감한 자료는 코드에 포함하지 않는다.</p>
-      </div>
+```
+<div class="content">
+  <span class="tag">Summary</span>
+  <h2>13. 정리 및 주의할 점</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="icon">✅</div>
+      <p class="card-title">검토 필요</p>
+      <p class="card-desc">AI가 만든 내용을 그대로 제출하지 말고 반드시 확인해야 한다.</p>
     </div>
+    <div class="card">
+      <div class="icon">📄</div>
+      <p class="card-title">파일 이름</p>
+      <p class="card-desc">GitHub Pages를 위해 파일 이름은 index.html로 저장한다.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🔒</div>
+      <p class="card-title">정보 보호</p>
+      <p class="card-desc">개인정보, 비밀번호, 민감한 자료는 코드에 포함하지 않는다.</p>
+    </div>
+  </div>
+</div>
+```
+
   </section>
 
-  <!-- 15장 -->
-  <section class="slide center">
+  <section class="slide">
     <div class="bg-grid"></div>
     <div class="shape orb" style="left: -90px; bottom: -90px;"></div>
     <div class="shape ring" style="right: 92px; top: 88px;"></div>
     <div class="shape line" style="right: 210px; bottom: 130px;"></div>
 
-    <span class="tag">AI와비즈니스애플리케이션</span>
-    <h1 class="hero-title">깃허브 활용 가이드 2026(7팀)</h1>
-    <p class="subtitle">감사합니다</p>
-    <p class="team-line">7팀 · Q & A</p>
+```
+<div class="content center">
+  <span class="tag">AI와비즈니스애플리케이션</span>
+  <h1 class="hero-title">감사합니다.</h1>
+</div>
+```
+
   </section>
 
   <div class="controls">
@@ -853,4 +910,3 @@
 
 </body>
 </html>
-```
