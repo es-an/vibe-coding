@@ -14,7 +14,6 @@
     }
 
     :root {
-      --navy: #111827;
       --blue: #2563eb;
       --sky: #38bdf8;
       --violet: #8b5cf6;
@@ -55,6 +54,12 @@
       width: 100%;
       max-width: 1120px;
       margin: 0 auto;
+      transform: translateY(-34px);
+    }
+
+    .slide:first-of-type .content,
+    .slide:last-of-type .content {
+      transform: translateY(0);
     }
 
     .content.center {
@@ -210,13 +215,16 @@
       font-weight: 560;
       letter-spacing: -0.3px;
       color: rgba(71, 85, 105, 0.72);
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
 
     .source {
-      margin-top: 22px;
+      width: 1000px;
+      max-width: 100%;
+      margin-top: 18px;
       font-size: 17px;
       color: rgba(71, 85, 105, 0.54);
+      text-align: right;
     }
 
     ul {
@@ -279,7 +287,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-top: 28px;
+      margin-top: 16px;
       padding: 12px 22px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.72);
@@ -488,8 +496,7 @@
   <h2>1. 바이브 코딩이란?</h2>
   <p class="lead">
     바이브 코딩은 사람이 모든 코드를 직접 작성하기보다,<br>
-    생성형 인공지능에게 원하는 기능과 목적을 설명한 뒤<br>
-    AI가 만든 코드를 활용해 프로그램을 완성하는 방식이다.
+    생성형 인공지능에게 원하는 기능과 목적을 설명한 뒤 AI가 만든 코드를 활용해 프로그램을 완성하는 방식이다.
   </p>
   <div class="box">
     <p>
